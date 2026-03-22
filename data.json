@@ -9,26 +9,6 @@
   },
   "holders": [
     {
-      "country": "Grand Total",
-      "current": 9305.8,
-      "prior": 9271.0
-    },
-    {
-      "country": "Of Which: Foreign Official",
-      "current": 3954.8,
-      "prior": 3887.0
-    },
-    {
-      "country": "Of Which: Foreign Official T-Bonds & Notes",
-      "current": 3547.1,
-      "prior": 3498.5
-    },
-    {
-      "country": "All Other",
-      "current": 1831.3,
-      "prior": 1822.8
-    },
-    {
       "country": "Japan",
       "current": 1225.3,
       "prior": 1185.5
@@ -107,6 +87,26 @@
       "country": "India",
       "current": 190.4,
       "prior": 182.9
+    },
+    {
+      "country": "Brazil",
+      "current": 168.0,
+      "prior": 168.7
+    },
+    {
+      "country": "Korea, South",
+      "current": 141.3,
+      "prior": 140.6
+    },
+    {
+      "country": "Saudi Arabia",
+      "current": 134.8,
+      "prior": 149.5
+    },
+    {
+      "country": "Israel",
+      "current": 114.7,
+      "prior": 105.7
     }
   ]
 }
