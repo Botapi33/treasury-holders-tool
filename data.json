@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "title": "Major Foreign Holders of U.S. Treasury Securities",
+    "source": "U.S. Treasury TIC",
+    "frequency": "Monthly",
+    "lastUpdated": "2026-03-15",
+    "reportMonth": "2026-01"
+  },
+  "holders": [
+    { "country": "Japan", "current": 1100.0, "prior": 1088.0 },
+    { "country": "China", "current": 760.0, "prior": 768.0 },
+    { "country": "United Kingdom", "current": 740.0, "prior": 726.0 },
+    { "country": "Luxembourg", "current": 410.0, "prior": 404.0 },
+    { "country": "Cayman Islands", "current": 395.0, "prior": 401.0 },
+    { "country": "Canada", "current": 350.0, "prior": 345.0 },
+    { "country": "Belgium", "current": 332.0, "prior": 334.0 },
+    { "country": "France", "current": 290.0, "prior": 286.0 },
+    { "country": "Ireland", "current": 281.0, "prior": 279.0 },
+    { "country": "Switzerland", "current": 270.0, "prior": 271.0 }
+  ]
+}
