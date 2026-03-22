@@ -5,32 +5,44 @@ from urllib.request import urlopen
 
 URL = "https://ticdata.treasury.gov/resource-center/data-chart-center/tic/Documents/slt_table5.txt"
 
+EXCLUDED_ROWS = {
+    "grand total",
+    "of which: foreign official",
+    "of which: foreign official t-bonds & notes",
+    "all other"
+}
+
 def fetch_data():
     with urlopen(URL) as response:
         return response.read().decode("utf-8", errors="replace")
 
+def is_number(value: str) -> bool:
+    return re.match(r"^-?\d+(\.\d+)?$", value) is not None
+
 def parse_data(raw):
     lines = [line.strip() for line in raw.splitlines() if line.strip()]
 
-    # Header finden (enthält Monate)
-    header = next((l for l in lines if re.match(r"^Country\s+\d{4}-\d{2}", l)), None)
+    header = next((line for line in lines if re.match(r"^Country\s+\d{4}-\d{2}", line)), None)
     if not header:
-        raise Exception("Header nicht gefunden")
+        raise Exception("Header not found in Treasury file.")
 
     months = header.split()[1:]
-    latest = months[0]
-    prior = months[1]
+    if len(months) < 2:
+        raise Exception("Could not detect latest and prior month.")
+
+    latest_month = months[0]
+    prior_month = months[1]
 
     rows = []
 
     for line in lines:
         if line.startswith("Country "):
             continue
-        if "Table" in line:
+        if line.lower().startswith("table "):
             continue
-        if "Holdings" in line:
+        if line.lower().startswith("holdings"):
             continue
-        if "Billions" in line:
+        if line.lower().startswith("billions"):
             continue
 
         parts = line.split()
@@ -38,13 +50,20 @@ def parse_data(raw):
             continue
 
         numbers = []
-        while parts and re.match(r"^-?\d+(\.\d+)?$", parts[-1]):
+        while parts and is_number(parts[-1]):
             numbers.insert(0, parts.pop())
 
         if len(numbers) < 2:
             continue
 
-        country = " ".join(parts)
+        country = " ".join(parts).strip()
+        if not country:
+            continue
+
+        country_lower = country.lower()
+        if country_lower in EXCLUDED_ROWS:
+            continue
+
         current = float(numbers[0])
         prior_val = float(numbers[1])
 
@@ -54,8 +73,10 @@ def parse_data(raw):
             "prior": prior_val
         })
 
-    # Sortieren
     rows.sort(key=lambda x: x["current"], reverse=True)
+
+    if not rows:
+        raise Exception("No valid country rows were parsed.")
 
     return {
         "meta": {
@@ -63,8 +84,8 @@ def parse_data(raw):
             "source": "U.S. Treasury TIC",
             "frequency": "Monthly",
             "lastUpdated": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-            "reportMonth": latest,
-            "priorMonth": prior
+            "reportMonth": latest_month,
+            "priorMonth": prior_month
         },
         "holders": rows[:20]
     }
@@ -83,7 +104,7 @@ def main():
     print("Saving data.json...")
     save_json(parsed)
 
-    print("Done ✅")
+    print("Done.")
     print(f"Latest month: {parsed['meta']['reportMonth']}")
     print(f"Top holder: {parsed['holders'][0]['country']}")
 
