@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Major Foreign Holders of U.S. Treasury Securities | BondStats</title>
+  <meta
+    name="description"
+    content="Track which countries hold the largest reported amounts of U.S. Treasuries using official U.S. Treasury TIC data."
+  />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root{
+      --bg:#0b1422;
+      --panel:#111c2d;
+      --panel2:#162338;
+      --border:#24364f;
+      --text:#f3f6fb;
+      --muted:#cfd8e6;
+      --soft:#9db0c8;
+      --accent:#86b7ff;
+      --max:1180px;
+      --radius:18px;
+      --shadow:0 18px 40px rgba(0,0,0,.28);
+    }
+
+    * { box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(134,183,255,.08), transparent 28%),
+        linear-gradient(180deg,#08111d 0%, #0b1422 100%);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 18px 40px;
+    }
+
+    .hero,
+    .panel,
+    .stat,
+    .table-wrap{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .hero{
+      padding:34px;
+      margin-bottom:20px;
+      background:
+        radial-gradient(circle at top right, rgba(134,183,255,.08), transparent 30%),
+        linear-gradient(180deg, #101a2c 0%, #0f1828 100%);
+    }
+
+    .eyebrow{
+      color:var(--accent);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:700;
+      margin:0 0 10px;
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:42px;
+      line-height:1.08;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      max-width:860px;
+      font-size:17px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px;
+      margin:20px 0;
+    }
+
+    .stat{
+      padding:18px 20px;
+      background:var(--panel2);
+    }
+
+    .stat-label{
+      display:block;
+      color:var(--soft);
+      font-size:12px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      margin-bottom:8px;
+    }
+
+    .stat-value{
+      font-size:28px;
+      font-weight:700;
+      line-height:1.15;
+      margin-bottom:6px;
+    }
+
+    .stat-note{
+      color:var(--soft);
+      font-size:13px;
+      margin:0;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .panel{
+      padding:22px;
+    }
+
+    h2{
+      margin:0 0 10px;
+      font-size:28px;
+    }
+
+    .lead{
+      margin:0 0 16px;
+      color:var(--muted);
+    }
+
+    .status{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.04em;
+      background:rgba(134,183,255,.12);
+      color:var(--accent);
+      margin-bottom:16px;
+    }
+
+    canvas{
+      width:100% !important;
+      height:420px !important;
+    }
+
+    .table-wrap{
+      overflow:hidden;
+      margin-bottom:18px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      background:var(--panel);
+    }
+
+    thead th{
+      text-align:left;
+      padding:14px 16px;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      color:var(--soft);
+      border-bottom:1px solid var(--border);
+    }
+
+    tbody td{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      color:var(--text);
+      font-size:15px;
+    }
+
+    tbody tr:hover{
+      background:rgba(255,255,255,.025);
+    }
+
+    .muted{
+      color:var(--soft);
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .meta p{
+      margin:8px 0;
+      color:var(--muted);
+    }
+
+    .faq h3{
+      margin:20px 0 6px;
+      font-size:18px;
+    }
+
+    .faq p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 16px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      color:var(--text);
+      font-weight:700;
+    }
+
+    .btn.primary{
+      background:var(--accent);
+      color:#08111d;
+      border-color:var(--accent);
+    }
+
+    .small{
+      font-size:13px;
+      color:var(--soft);
+    }
+
+    @media (max-width: 980px){
+      .stats,
+      .grid,
+      .meta{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:34px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+
+    <section class="hero">
+      <p class="eyebrow">BondStats Treasury Holdings</p>
+      <h1>Major Foreign Holders of U.S. Treasury Securities</h1>
+      <p class="sub">
+        Track which countries hold the largest reported amounts of U.S. Treasuries using official U.S. Treasury TIC data.
+      </p>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <span class="stat-label">Largest Holder</span>
+        <div id="largestHolder" class="stat-value">Loading...</div>
+        <p class="stat-note">Largest reported foreign holder in the latest release.</p>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Second Largest</span>
+        <div id="secondHolder" class="stat-value">Loading...</div>
+        <p class="stat-note">Second-largest reported foreign holder.</p>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Reporting Month</span>
+        <div id="reportMonth" class="stat-value">Loading...</div>
+        <p class="stat-note">Latest month shown in the data file.</p>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Top 10 Total</span>
+        <div id="topTenTotal" class="stat-value">Loading...</div>
+        <p class="stat-note">Sum of the displayed top ten holders.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Top Foreign Holders</h2>
+        <p class="lead">
+          Compare the largest reported foreign country-level holders of U.S. Treasury securities.
+        </p>
+        <canvas id="holdersChart"></canvas>
+      </div>
+
+      <div class="panel">
+        <span class="status">Official Treasury TIC Data</span>
+        <h2>Why This Matters</h2>
+        <p class="lead">
+          Foreign demand is an important part of the U.S. Treasury market. Country-level holdings can help frame discussions around reserve management, global liquidity and cross-border fixed income demand.
+        </p>
+        <p class="muted">
+          This page is best used as a market-structure reference rather than a short-term trading signal.
+        </p>
+
+        <div class="links">
+          <a class="btn primary" href="https://www.bondstats.org/bond-market-hub">Bond Market Hub</a>
+          <a class="btn" href="https://www.bondstats.org/data-sources">Data Sources</a>
+          <a class="btn" href="https://www.bondstats.org/methodology">Methodology</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Country</th>
+            <th>Holdings (USD bn)</th>
+            <th>Prior Month</th>
+            <th>Change</th>
+          </tr>
+        </thead>
+        <tbody id="holdersTableBody"></tbody>
+      </table>
+    </section>
+
+    <section class="meta">
+      <div class="panel">
+        <h2>Data & Transparency</h2>
+        <p><strong>Data Source:</strong> U.S. Treasury TIC</p>
+        <p><strong>Coverage:</strong> Major foreign holders of U.S. Treasury securities</p>
+        <p><strong>Update Frequency:</strong> Monthly</p>
+        <p><strong>Use Case:</strong> Informational and educational</p>
+      </div>
+
+      <div class="panel">
+        <h2>Methodology Notes</h2>
+        <p>
+          Country attribution is not perfectly precise because holdings may be reported through custodians and financial centers rather than ultimate beneficial ownership.
+        </p>
+        <p>
+          BondStats presents these figures as a structured holdings reference, not as an official investment signal.
+        </p>
+        <p class="small" id="lastUpdatedNote">Loading metadata...</p>
+      </div>
+    </section>
+
+    <section class="panel faq" style="margin-top:18px;">
+      <h2>FAQ</h2>
+
+      <h3>What does this page show?</h3>
+      <p>
+        It shows which foreign countries hold the largest reported amounts of U.S. Treasury securities.
+      </p>
+
+      <h3>How often is this data updated?</h3>
+      <p>
+        The data file can be refreshed monthly following the latest Treasury TIC release.
+      </p>
+
+      <h3>Is this a live market indicator?</h3>
+      <p>
+        No. This is a monthly holdings dataset best used as a structural market reference.
+      </p>
+    </section>
+
+  </main>
+
+  <script>
+    const DATA_URL = "./data.json";
+    let holdersChart = null;
+
+    function formatBn(value) {
+      return "$" + value.toFixed(1) + "bn";
+    }
+
+    function formatChange(current, prior) {
+      const delta = current - prior;
+      const sign = delta > 0 ? "+" : "";
+      return sign + delta.toFixed(1) + "bn";
+    }
+
+    function topTen(rows) {
+      return [...rows]
+        .sort((a, b) => b.current - a.current)
+        .slice(0, 10);
+    }
+
+    function updateStats(data) {
+      const top = topTen(data.holders);
+      const total = top.reduce((sum, row) => sum + row.current, 0);
+
+      document.getElementById("largestHolder").textContent = top[0]?.country || "N/A";
+      document.getElementById("secondHolder").textContent = top[1]?.country || "N/A";
+      document.getElementById("reportMonth").textContent = data.meta.reportMonth || "N/A";
+      document.getElementById("topTenTotal").textContent = formatBn(total);
+      document.getElementById("lastUpdatedNote").textContent =
+        "Last updated: " + (data.meta.lastUpdated || "N/A");
+    }
+
+    function updateTable(data) {
+      const rows = topTen(data.holders);
+      const tbody = document.getElementById("holdersTableBody");
+      tbody.innerHTML = "";
+
+      rows.forEach((row, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${row.country}</td>
+          <td>${formatBn(row.current)}</td>
+          <td class="muted">${formatBn(row.prior)}</td>
+          <td class="muted">${formatChange(row.current, row.prior)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateChart(data) {
+      const rows = topTen(data.holders);
+      const ctx = document.getElementById("holdersChart").getContext("2d");
+
+      if (holdersChart) {
+        holdersChart.destroy();
+      }
+
+      holdersChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: rows.map(r => r.country),
+          datasets: [{
+            label: "Holdings (USD billions)",
+            data: rows.map(r => r.current),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: {
+                color: "#eaf1f8"
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: "#cfd8e6"
+              },
+              grid: {
+                color: "rgba(255,255,255,0.06)"
+              }
+            },
+            y: {
+              ticks: {
+                color: "#cfd8e6",
+                callback: value => "$" + value + "bn"
+              },
+              grid: {
+                color: "rgba(255,255,255,0.06)"
+              }
+            }
+          }
+        }
+      });
+    }
+
+    async function loadData() {
+      const response = await fetch(DATA_URL, { cache: "no-store" });
+      const data = await response.json();
+      updateStats(data);
+      updateTable(data);
+      updateChart(data);
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
