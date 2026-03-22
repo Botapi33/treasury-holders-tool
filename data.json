@@ -3,19 +3,110 @@
     "title": "Major Foreign Holders of U.S. Treasury Securities",
     "source": "U.S. Treasury TIC",
     "frequency": "Monthly",
-    "lastUpdated": "2026-03-15",
-    "reportMonth": "2026-01"
+    "lastUpdated": "2026-03-22",
+    "reportMonth": "2026-01",
+    "priorMonth": "2025-12"
   },
   "holders": [
-    { "country": "Japan", "current": 1100.0, "prior": 1088.0 },
-    { "country": "China", "current": 760.0, "prior": 768.0 },
-    { "country": "United Kingdom", "current": 740.0, "prior": 726.0 },
-    { "country": "Luxembourg", "current": 410.0, "prior": 404.0 },
-    { "country": "Cayman Islands", "current": 395.0, "prior": 401.0 },
-    { "country": "Canada", "current": 350.0, "prior": 345.0 },
-    { "country": "Belgium", "current": 332.0, "prior": 334.0 },
-    { "country": "France", "current": 290.0, "prior": 286.0 },
-    { "country": "Ireland", "current": 281.0, "prior": 279.0 },
-    { "country": "Switzerland", "current": 270.0, "prior": 271.0 }
+    {
+      "country": "Grand Total",
+      "current": 9305.8,
+      "prior": 9271.0
+    },
+    {
+      "country": "Of Which: Foreign Official",
+      "current": 3954.8,
+      "prior": 3887.0
+    },
+    {
+      "country": "Of Which: Foreign Official T-Bonds & Notes",
+      "current": 3547.1,
+      "prior": 3498.5
+    },
+    {
+      "country": "All Other",
+      "current": 1831.3,
+      "prior": 1822.8
+    },
+    {
+      "country": "Japan",
+      "current": 1225.3,
+      "prior": 1185.5
+    },
+    {
+      "country": "United Kingdom",
+      "current": 895.3,
+      "prior": 866.0
+    },
+    {
+      "country": "China, Mainland",
+      "current": 694.4,
+      "prior": 683.5
+    },
+    {
+      "country": "Belgium",
+      "current": 451.0,
+      "prior": 477.3
+    },
+    {
+      "country": "Luxembourg",
+      "current": 446.9,
+      "prior": 435.1
+    },
+    {
+      "country": "Cayman Islands",
+      "current": 432.7,
+      "prior": 421.2
+    },
+    {
+      "country": "Of Which: Foreign Official Treasury Bills",
+      "current": 407.7,
+      "prior": 388.5
+    },
+    {
+      "country": "Canada",
+      "current": 395.8,
+      "prior": 468.2
+    },
+    {
+      "country": "France",
+      "current": 380.5,
+      "prior": 368.9
+    },
+    {
+      "country": "Ireland",
+      "current": 342.0,
+      "prior": 340.7
+    },
+    {
+      "country": "Taiwan",
+      "current": 307.8,
+      "prior": 310.6
+    },
+    {
+      "country": "Switzerland",
+      "current": 289.2,
+      "prior": 294.1
+    },
+    {
+      "country": "Singapore",
+      "current": 273.4,
+      "prior": 278.4
+    },
+    {
+      "country": "Hong Kong",
+      "current": 259.9,
+      "prior": 267.8
+    },
+    {
+      "country": "Norway",
+      "current": 218.8,
+      "prior": 208.1
+    },
+    {
+      "country": "India",
+      "current": 190.4,
+      "prior": 182.9
+    }
   ]
 }
