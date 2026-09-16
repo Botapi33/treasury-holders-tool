@@ -3,110 +3,110 @@
     "title": "Major Foreign Holders of U.S. Treasury Securities",
     "source": "U.S. Treasury TIC",
     "frequency": "Monthly",
-    "lastUpdated": "2026-08-16",
-    "reportMonth": "2026-05",
-    "priorMonth": "2026-04"
+    "lastUpdated": "2026-09-16",
+    "reportMonth": "2026-07",
+    "priorMonth": "2026-06"
   },
   "holders": [
     {
       "country": "Japan",
-      "current": 1143.1,
-      "prior": 1209.9
+      "current": 1103.9,
+      "prior": 1116.7
     },
     {
       "country": "United Kingdom",
-      "current": 948.6,
-      "prior": 937.5
+      "current": 998.3,
+      "prior": 939.9
     },
     {
       "country": "China, Mainland",
-      "current": 659.3,
-      "prior": 651.1
+      "current": 618.0,
+      "prior": 633.4
     },
     {
       "country": "Belgium",
-      "current": 472.0,
-      "prior": 459.9
+      "current": 470.7,
+      "prior": 482.5
     },
     {
       "country": "Cayman Islands",
-      "current": 471.3,
-      "prior": 471.6
+      "current": 460.1,
+      "prior": 453.1
     },
     {
       "country": "Luxembourg",
-      "current": 436.0,
-      "prior": 431.1
+      "current": 442.1,
+      "prior": 434.2
     },
     {
       "country": "Canada",
-      "current": 435.8,
-      "prior": 397.1
+      "current": 426.3,
+      "prior": 459.6
     },
     {
       "country": "Of Which: Foreign Official Treasury Bills",
-      "current": 396.2,
-      "prior": 457.3
-    },
-    {
-      "country": "France",
-      "current": 393.1,
-      "prior": 393.3
+      "current": 354.4,
+      "prior": 360.6
     },
     {
       "country": "Ireland",
-      "current": 357.2,
-      "prior": 345.3
+      "current": 350.2,
+      "prior": 353.5
+    },
+    {
+      "country": "France",
+      "current": 348.4,
+      "prior": 389.9
     },
     {
       "country": "Taiwan",
-      "current": 306.0,
-      "prior": 300.9
+      "current": 296.1,
+      "prior": 302.5
     },
     {
       "country": "Switzerland",
-      "current": 281.1,
-      "prior": 288.6
+      "current": 284.8,
+      "prior": 284.9
     },
     {
       "country": "Singapore",
-      "current": 278.0,
-      "prior": 277.5
+      "current": 277.7,
+      "prior": 284.4
     },
     {
       "country": "Hong Kong",
-      "current": 271.9,
-      "prior": 269.1
+      "current": 258.3,
+      "prior": 255.8
     },
     {
       "country": "Norway",
-      "current": 207.3,
-      "prior": 214.7
+      "current": 206.9,
+      "prior": 203.2
     },
     {
       "country": "India",
-      "current": 181.3,
-      "prior": 181.0
+      "current": 202.6,
+      "prior": 186.4
     },
     {
       "country": "Brazil",
-      "current": 168.9,
-      "prior": 168.6
+      "current": 168.0,
+      "prior": 168.4
     },
     {
       "country": "Saudi Arabia",
-      "current": 140.3,
-      "prior": 140.1
+      "current": 142.4,
+      "prior": 142.5
     },
     {
       "country": "Korea, South",
-      "current": 132.3,
-      "prior": 135.2
+      "current": 131.5,
+      "prior": 134.7
     },
     {
       "country": "United Arab Emirates",
-      "current": 118.6,
-      "prior": 112.5
+      "current": 110.1,
+      "prior": 114.8
     }
   ]
 }
